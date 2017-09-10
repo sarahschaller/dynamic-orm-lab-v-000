@@ -34,6 +34,10 @@ class InteractiveRecord
     self.class.table_name
   end
 
+  def col_names_for_insert
+    self.class.column_names.delete_if {|col| col == "id"}.join(", ")
+  end
+
   def save
     sql = "INSERT INTO #{table_name_for_insert} (#{col_names_for_insert})
     VALUES (#{values_for_insert})"
