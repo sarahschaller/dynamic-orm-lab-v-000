@@ -62,6 +62,14 @@ class InteractiveRecord
     DB[:conn].execute(sql)
   end
 
+  def self.find_by(attributes)
+    attributes.map do |key, value|
+      sql = "SELECT * FROM #{self.table_name} WHERE #{key}= ?"
+      DB[:conn].execute(sql, value)
+    end.first
+  end
+
+
 
 
 end
